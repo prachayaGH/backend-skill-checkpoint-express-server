@@ -15,3 +15,18 @@ export const validateQuestion = (req, res, next) => {
 
     next()
 }
+
+export const validateAnswer = (req, res, next) => {
+    const {content} = req.body
+    if (!content) {
+        return res.status(400).json({
+            message: "Invalid request data.",
+        })
+    }
+    if (content.length > 300) {
+        return res.status(400).json({
+            message: "Answer must be at least 300 characters long.",
+        })
+    }
+    next()
+}
